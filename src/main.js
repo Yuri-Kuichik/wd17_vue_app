@@ -8,7 +8,7 @@ import router from './router'
 
 import BaseLayout from './components/BaseLayout.vue'
 import BaseButton from './components/BaseButton.vue'
-import VueSpinner from '../VueSpinner.vue'
+import VueSpinner from './components/VueSpinner.vue'
 
 const app = createApp(App)
 
