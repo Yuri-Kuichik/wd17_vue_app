@@ -1,14 +1,8 @@
 <script>
-import BaseLayout from '@/components/BaseLayout.vue';
-
 export default {
-  components: {
-    BaseLayout
-  },
-
   data() {
     return {
-      count: 0
+      
     }
   }
 }
@@ -16,13 +10,10 @@ export default {
 
 <template>
   <BaseLayout>
-    <h2>Count is: {{ count }}</h2>
-    <button 
-      class="btn" 
-      @click="count++"
-    >
-      Click me
-    </button>
+    <h2>Post list</h2>
+    
+    <!-- There will be a PostList component here -->
+    
   </BaseLayout>
   
 </template>
