@@ -2,8 +2,8 @@
 export default {
   props: {
     loading: {
-    type: Boolean,
-    default: false
+      type: Boolean,
+      default: false
     },
     text: {
       type: String,
@@ -18,6 +18,7 @@ export default {
       default: 'm'
     }
   },
+
   computed: {
     rootClasses() {
       return { 
@@ -37,12 +38,7 @@ export default {
   >
     <VueSpinner v-if="loading"/>
     <span v-else>
-      <template v-if="$slots.default">
-        <slot/>
-      </template>
-      <template v-else>
-        {{ text }}
-      </template>
+      {{ text }}
     </span>
   </button>
 
@@ -90,6 +86,4 @@ export default {
     padding: 0 16px;
     height: 48px;
 }
-
-
 </style>
