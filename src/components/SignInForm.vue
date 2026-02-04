@@ -12,6 +12,14 @@
         },  
         
         methods: {
+            changeEmail(val) {
+                console.log(val)
+                this.email = val
+            },
+            changePassword(val) {
+                console.log(val)
+                this.password = val
+            },
             async sendForm() {
                 this.loading = true
 
@@ -27,11 +35,17 @@
                     },
                     body: JSON.stringify(data)
                 })
-                console.log(res)
 
                 this.resData = await res.json()
 
                 this.loading = false
+            }
+        },
+
+        computed: {
+            isDisabledButton() {
+                const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+                return this.password.length < 6 || !EMAIL_REGEXP.test(this.email);
             }
         }
     }
@@ -39,10 +53,30 @@
 </script>
 
 <template>
-    <div>
+    <div class="sign-in-form-wrapper">
         <form class="sign-in-form">
             <h2>Sign In form</h2>
-            
+            <BaseInput 
+                label="Email"  
+                name="email" 
+                placeholder="Enter your email" 
+                :error-message="emailErrorMsg" 
+                @change-value="changeEmail"
+            />
+            <BaseInput 
+                label="Password" 
+                name="password" 
+                placeholder="Enter your password" 
+                :error-message="passwordErrorMsg"
+                @change-value="changePassword"
+            />
+            <BaseButton 
+                class="sign-in-form_button"
+                @click.prevent="sendForm"
+                :is-disabled="isDisabledButton"
+                :loading
+                size="l"
+            />
         </form>
     </div>
 </template>
