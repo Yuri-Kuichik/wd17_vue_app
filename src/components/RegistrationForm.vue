@@ -62,7 +62,7 @@
                 @change-value="changeVal"
             />
             <BaseButton 
-                class="sign-in-form_button"
+                class="registration-form_button"
                 @click.prevent="sendForm"
                 :is-disabled="!username && !password && !email"
             />
