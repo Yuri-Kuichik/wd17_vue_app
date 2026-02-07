@@ -23,21 +23,11 @@ export default {
     computed: {
         resultCalculator() {
             switch (this.currentOperator) {
+                case '': return 0
                 case '+': return this.value1 + this.value2
-
-                    break;
-
                 case '-': return this.value1 - this.value2
-
-                    break;
-
                 case '*': return this.value1 * this.value2
-
-                    break;
-
                 case '/': return parseFloat((this.value1 / this.value2).toFixed(9))
-
-                    break;
             }
         }
     },  
@@ -52,10 +42,10 @@ export default {
                 <h2>{{ titleCalculator }}</h2>
                 <div class="col form-control calc">
                     <input
-                    type="number"
-                    v-model.number="value1"
-                    :class="classObject"
-                    class="col form-control calc"                    
+                      type="number"
+                      v-model.number="value1"
+                      :class="classObject"
+                      class="col form-control calc"                    
                     />
                     <div class="calc-actions">
                         <button class="calc-btn" @click="currentOperator = '+'">
@@ -73,13 +63,13 @@ export default {
                     </div>
 
                     <input
-                    type="number"
-                    v-model.number="value2"
-                    :class="classObject"
-                    class="col form-control calc"                    
+                      type="number"
+                      v-model.number="value2"
+                      :class="classObject"
+                      class="col form-control calc"                    
                     />
 
-                    <h3>Result: {{ currentOperator ? resultCalculator : 0 }}</h3>
+                    <h3>Result: {{ resultCalculator }}</h3>
                 </div>
             </div>
         </div>
