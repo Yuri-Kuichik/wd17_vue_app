@@ -1,10 +1,15 @@
 <script>
 import BaseLayout from '@/components/BaseLayout.vue';
-
+import PostList from '@/pages/PostList.vue';
 export default {
+  components: {
+    BaseLayout,
+    PostList
+  },
+
   data() {
     return {
-      count: 0
+      
     }
   }
 }
@@ -12,9 +17,8 @@ export default {
 
 <template>
   <BaseLayout>
-    
-  </BaseLayout>
-  
+    <PostList />
+  </BaseLayout>  
 </template>
 
 <style scoped>
