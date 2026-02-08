@@ -47,7 +47,7 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     list-style: none;
-    padding: 0;
+    padding: 10px;
 }
 
 .card {
@@ -57,6 +57,8 @@ export default {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding: 0;
 }
 
 .card:hover {
@@ -79,7 +81,8 @@ export default {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    align-items: start;
+    justify-content: start;
 }
 
 .date {
@@ -93,6 +96,7 @@ export default {
     font-size: 22px;
     color: #2c3e50;
     line-height: 1.4;
+    text-align: start;
 }
 
 .description {
@@ -101,5 +105,6 @@ export default {
     line-height: 1.6;
     max-height: 90px;
     overflow: hidden;
+    text-align: start;
 }
 </style>
