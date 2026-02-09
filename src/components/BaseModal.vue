@@ -1,12 +1,3 @@
-<script>
-export default {
-   created() {
-    console.log(this.$slots.header)
-  }
-}
-
-</script>
-
 <template>
   <div class="modal-wrapper" @click="$emit('close')">
     <div class="modal">
