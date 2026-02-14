@@ -6,7 +6,7 @@ export default {
         }
     },
     
-    mounted() {
+    created() {
         this.getPosts();
     },
 

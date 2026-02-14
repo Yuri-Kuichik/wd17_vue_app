@@ -1,9 +1,7 @@
 <script>
-import BaseLayout from '@/components/BaseLayout.vue';
-import PostList from '@/pages/PostList.vue';
+import PostList from '@/components/PostList.vue';
 export default {
   components: {
-    BaseLayout,
     PostList
   },
 
