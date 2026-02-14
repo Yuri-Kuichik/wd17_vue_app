@@ -12,7 +12,7 @@ export default {
         placeholder: String,
         errorMessage: {
             type: String,
-            default: 'Error message'
+            default: ''
         }
     }
 }
