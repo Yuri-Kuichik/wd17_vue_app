@@ -1,10 +1,13 @@
 <script>
-import BaseLayout from '@/components/BaseLayout.vue';
-
+import PostList from '@/components/PostList.vue';
 export default {
+  components: {
+    PostList
+  },
+
   data() {
     return {
-      count: 0
+      
     }
   }
 }
@@ -12,9 +15,8 @@ export default {
 
 <template>
   <BaseLayout>
-    
-  </BaseLayout>
-  
+    <PostList />
+  </BaseLayout>  
 </template>
 
 <style scoped>
