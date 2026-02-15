@@ -1,22 +1,18 @@
 <script>
+import { usePostStore } from '@/stores/posts';
+
 export default {
-    props: {
-        posts: {
-            type: Array,
-            default: () => [],
-        }
-    },
-
-    data() {
+    setup() {
+        const postStore = usePostStore();
         return {
-
+            postStore
         }
     },
 
     methods: {
         openPostPage(postId) {
-            $router.push({ name: 'post', params: { id: postId }})
-        }
+            this.$router.push({ name: 'post', params: { id: postId } })
+        },
     },
 }
 </script>
@@ -24,11 +20,7 @@ export default {
 <template>
     <div class="container">
         <ul class="list">
-            <li
-                v-for="post in posts"
-                :key="post.id" class="card"
-                @click="openPostPage(post.id)"
-            >
+            <li v-for="post in postStore.posts" :key="post.id" class="card" @click="openPostPage(post.id)">
                 <div class="img__wrapper">
                     <img :src="post.image" :alt="post.title" class="img">
                 </div>
