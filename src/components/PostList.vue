@@ -11,7 +11,13 @@ export default {
         return {
 
         }
-    },    
+    },
+
+    methods: {
+        openPostPage(postId) {
+            $router.push({ name: 'post', params: { id: postId }})
+        }
+    },
 }
 </script>
 
@@ -21,7 +27,7 @@ export default {
             <li
                 v-for="post in posts"
                 :key="post.id" class="card"
-                @click="$router.push({ name: 'post', params: { id: post.id }})"
+                @click="openPostPage(post.id)"
             >
                 <div class="img__wrapper">
                     <img :src="post.image" :alt="post.title" class="img">
