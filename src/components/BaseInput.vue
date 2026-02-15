@@ -3,7 +3,7 @@ export default {
     props: {
         label: {
             type: String,
-            default: 'Name label'
+            default: ''
         },
         name: {
             type: String,

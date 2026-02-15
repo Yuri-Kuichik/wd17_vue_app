@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage.vue'
 import CalculatorPage from '@/pages/CalculatorPage.vue'
 import CounterPage from '@/pages/CounterPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
+import PostPage from '@/pages/PostPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,7 +36,12 @@ const router = createRouter({
       path: '/calculator',
       name: 'calculator',
       component: CalculatorPage,
-    }
+    },
+    {
+      path: '/post/:id',
+      name: 'post',
+      component: PostPage,
+    },
   ],
 })
 
