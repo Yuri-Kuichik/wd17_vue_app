@@ -15,9 +15,11 @@ export default {
 
     methods: {
         async getPost() {
-            const response = await fetch(`https://studapi.teachmeskills.by/blog/posts/${this.$route.params.id}`);
+            if(this.$route.params.id){
+                const response = await fetch(`https://studapi.teachmeskills.by/blog/posts/${this.$route.params.id}`);
             const data = await response.json();
             this.postData = data;
+            }            
         }
     },
 }
