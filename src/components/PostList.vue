@@ -15,7 +15,7 @@ export default {
 
     methods: {
         openPostPage(postId) {
-            $router.push({ name: 'post', params: { id: postId }})
+            this.$router.push({ name: 'post', params: { id: postId }})
         }
     },
 }
