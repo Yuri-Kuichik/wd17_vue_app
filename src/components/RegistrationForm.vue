@@ -7,7 +7,7 @@
                 password: '',
                 emailErrorMsg: '',
                 passwordErrorMsg: '',
-                cource_group: 15,
+                course_group: 15,
                 loading: false,
                 resData: null,
             }
@@ -21,7 +21,7 @@
                     username: this.username,
                     email: this.email,
                     password: this.password,
-                    cource_group: 15,
+                    course_group: 15,
                 }
 
                 let res = await fetch('https://studapi.teachmeskills.by/auth/users/', {

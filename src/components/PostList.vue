@@ -1,20 +1,21 @@
 <script>
 export default {
-    data() {
-        return {
-            posts: [],
+    props: {
+        posts: {
+            type: Array,
+            default: () => [],
         }
     },
-    
-    created() {
-        this.getPosts();
+
+    data() {
+        return {
+
+        }
     },
 
     methods: {
-        async getPosts() {
-            const response = await fetch('https://studapi.teachmeskills.by/blog/posts/?author__course_group=15&limit=5');
-            const data = await response.json();
-            this.posts = data.results;
+        openPostPage(postId) {
+            this.$router.push({ name: 'post', params: { id: postId }})
         }
     },
 }
@@ -23,7 +24,11 @@ export default {
 <template>
     <div class="container">
         <ul class="list">
-            <li v-for="post in posts" :key="post.id" class="card">
+            <li
+                v-for="post in posts"
+                :key="post.id" class="card"
+                @click="openPostPage(post.id)"
+            >
                 <div class="img__wrapper">
                     <img :src="post.image" :alt="post.title" class="img">
                 </div>
