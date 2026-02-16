@@ -20,7 +20,7 @@
                     password: this.password
                 }
 
-                let res = await fetch('https://studapi.teachmeskills.by/auth/jwt/verify/', {
+                let res = await fetch('https://studapi.teachmeskills.by/auth/jwt/create/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -74,7 +74,7 @@
             <BaseButton
                 text="Send"
                 class="sign-in-form_button"
-                @click="sendForm"
+                @click.prevent="sendForm"
                 :is-disabled="isDisabledButton"
                 :loading="loading"
             />

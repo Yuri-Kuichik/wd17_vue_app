@@ -7,7 +7,7 @@
                 password: '',
                 emailErrorMsg: '',
                 passwordErrorMsg: '',
-                cource_group: 15,
+                course_group: 15,
                 loading: false,
                 resData: null,
             }
@@ -21,10 +21,10 @@
                     username: this.username,
                     email: this.email,
                     password: this.password,
-                    cource_group: 15,
+                    course_group: 15,
                 }
 
-                let res = await fetch('https://studapi.teachmeskills.by/auth/jwt/create/', {
+                let res = await fetch('https://studapi.teachmeskills.by/auth/users/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -83,7 +83,7 @@
             <BaseButton
                 text="Send"
                 class="registration-form_button"
-                @click="sendForm"
+                @click.prevent="sendForm"
             />
         </form>
     </div>
