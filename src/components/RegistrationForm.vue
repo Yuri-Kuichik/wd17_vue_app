@@ -1,38 +1,99 @@
 <script>
+    export default{
+        data() {
+            return {
+                username: '',
+                email: '',
+                password: '',
+                emailErrorMsg: '',
+                passwordErrorMsg: '',
+                cource_group: 15,
+                loading: false,
+                resData: null,
+            }
+        },  
+        
+        methods: {
+            async sendForm() {
+                this.loading = true
+
+                let data = {
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                    cource_group: 15,
+                }
+
+                let res = await fetch('https://studapi.teachmeskills.by/auth/users/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                console.log(res)
+
+                this.resData = await res.json()
+
+                this.loading = false
+            },
+
+            changeUsername(val) {
+                this.username = val
+            },
+
+            changeEmail(val) {
+                this.email = val
+            },
+
+            changePassword(val) {
+                this.password = val
+            }
+
+
+        }
+    }
+
 </script>
 
 <template>
+    <div>
+        <form class="registration-form">
+            <h2>Registration form</h2>
+            <BaseInput
+                label="Name"
+                name="name"
+                placeholder="Enter your name"
+                @change-value="changeUsername"
+            />
+            <BaseInput
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+                :error-message="emailErrorMsg"
+                @change-value="changeEmail"
+            />
+            <BaseInput
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                :error-message="passwordErrorMsg"
+                @change-value="changePassword"
+            />
+            <BaseButton
+                text="Send"
+                class="registration-form_button"
+                @click.prevent="sendForm"
+            />
+        </form>
+    </div>
 </template>
 
-<style scoped>
-.login-page {
-    padding: 40px 32px;
-    border: 1px solid rgb(207, 214, 220);
-    border-radius: 24px;
-    box-shadow: rgba(100, 100, 100, 0.4) 0px 8px 20px;
-}
-
-.form-switch {
-    display: flex;
-    gap: 12px;
-    border-bottom: solid 1px rgba(0, 0, 0, .12);
-
-    span {
-        cursor: pointer;
-        padding: 12px 16px;
-        border-bottom: solid 1px transparent;
-
-        &.active {
-            border-bottom: solid 2px rgb(253, 211, 42);
-        }
+<style lang="scss" scoped>
+.registration-form {
+    &_button {
+        margin-top: 1rem;
+        width: 100%;
     }
 }
-
-.form-wrapper {
-    padding: 2rem;
-    max-width: 480px;
-    border-radius: 8px;
-    flex-grow: 1;
-}
-
 </style>
