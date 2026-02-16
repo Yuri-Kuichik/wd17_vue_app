@@ -20,7 +20,7 @@
                     password: this.password
                 }
 
-                let res = await fetch('https://studapi.teachmeskills.by/auth/jwt/verify/', {
+                let res = await fetch('https://studapi.teachmeskills.by/auth/jwt/create/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
