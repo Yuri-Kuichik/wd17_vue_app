@@ -1,26 +1,19 @@
 <script>
 import BaseLayout from '@/components/BaseLayout.vue';
 import VueSpinner from '@/components/VueSpinner.vue';
+import { usePostStore } from '@/stores/posts';
 
 export default {
-    data() {
+    setup() {
+        const postStore = usePostStore();
         return {
-            postData: null,
+            postStore
         }
     },
 
-    async created() {
-        await this.getPost();
-    },
-
-    methods: {
-        async getPost() {
-            if(this.$route.params.id){
-                const response = await fetch(`https://studapi.teachmeskills.by/blog/posts/${this.$route.params.id}`);
-            const data = await response.json();
-            this.postData = data;
-            }            
-        }
+    created() {
+        const postId = this.$route.params.id;
+        this.postStore.getPost(postId);
     },
 }
 </script>
@@ -28,22 +21,22 @@ export default {
 <template>
     <BaseLayout>
         <div class="post-container">
-            <VueSpinner v-if="!postData" />
-            <article v-else class="post-content">
+            <VueSpinner v-if="postStore.loading" />
+            <article v-else-if="postStore.postData" class="post-content">
                 <h3 class="post-title">
-                    {{ postData.title }}
+                    {{ postStore.postData.title }}
                 </h3>
 
                 <div class="post-date__wrapper">
-                    <span class="post-date">{{ new Date(postData.date).toLocaleDateString() }}</span>
+                    <span class="post-date">{{ new Date(postStore.postData.date).toLocaleDateString() }}</span>
                 </div>
 
                 <div class="post-image__wrapper">
-                    <img :src="postData.image" :alt="postData.title" class="post-image">
+                    <img :src="postStore.postData.image" :alt="postStore.postData.title" class="post-image">
                 </div>
                 <div class="post-text">
                     <p>
-                        {{ postData.text }}
+                        {{ postStore.postData.text }}
                     </p>
                 </div>
             </article>

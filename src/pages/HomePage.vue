@@ -1,6 +1,9 @@
 <script>
 import BaseButton from '@/components/BaseButton.vue';
 import PostList from '@/components/PostList.vue';
+import VueSpinner from '@/components/VueSpinner.vue';
+import { usePostStore } from '@/stores/posts';
+
 export default {
   components: {
     PostList
@@ -8,29 +11,23 @@ export default {
 
   data() {
     return {
-      posts: [],
-      searchText: '',
-      baseUrl: 'https://studapi.teachmeskills.by',
-      limit: 'limit=6',
+    }
+  },
+
+  setup() {
+    const postStore = usePostStore();
+    return {
+      postStore
     }
   },
 
   created() {
-    this.getPosts();
+    this.postStore.getPosts();
   },
 
   methods: {
-    async getPosts() {
-      
-      const queryParams = `?author__course_group=15&${this.limit}${ this.searchText ? `&search=${ this.searchText }` : '' }`
-      const url = `${this.baseUrl}/blog/posts/${queryParams}`
-      const response = await fetch(url);
-      const data = await response.json();
-      this.posts = data.results;
-    },
-
     changeSearchText(value) {
-      this.searchText = value
+      this.postStore.searchText = value
     }
   },
 }
@@ -39,20 +36,12 @@ export default {
 <template>
   <BaseLayout>
     <div class="search-line">
-      <BaseInput
-        @change-value="changeSearchText"
-        placeholder="Input search text"
-        class="search-input"
-        name="search-input"
-      />
-      <BaseButton
-        text="Search"
-        size="s"
-        class="search-button"
-        @click="getPosts"
-      />
+      <BaseInput @change-value="changeSearchText" placeholder="Input search text" class="search-input"
+        name="search-input" />
+      <BaseButton text="Search" size="s" class="search-button" @click="postStore.getPosts" />
     </div>
-    <PostList :posts />
+    <VueSpinner v-if="postStore.loading" />
+    <PostList v-else />
   </BaseLayout>
 </template>
 
