@@ -74,7 +74,7 @@
             <BaseButton
                 text="Send"
                 class="sign-in-form_button"
-                @click="sendForm"
+                @click.prevent="sendForm"
                 :is-disabled="isDisabledButton"
                 :loading="loading"
             />

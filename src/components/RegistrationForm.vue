@@ -83,7 +83,7 @@
             <BaseButton
                 text="Send"
                 class="registration-form_button"
-                @click="sendForm"
+                @click.prevent="sendForm"
             />
         </form>
     </div>
