@@ -20,11 +20,15 @@ export default {
       const op1 = this.operand1 || 0;
       const op2 = this.operand2 || 0;
 
+      if (this.operator === '/' && op2 === 0) {
+        return 'Ошибка';
+      }
+
       switch(this.operator) {
         case '+': return op1 + op2;
         case '-': return op1 - op2;
         case '*': return op1 * op2;
-        case '/': return op2 !== 0 ? op1 / op2 : 'Деление на ноль запрещено!';
+        case '/': return op1 / op2;
         default: return 0;
       }
     },
@@ -37,7 +41,7 @@ export default {
 </script>
 
 <template>
-  <BaseLayout>
+<BaseLayout>
     <h2>Calculator page</h2>
     
     <div class="inputs">
