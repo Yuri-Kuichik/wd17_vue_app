@@ -10,10 +10,20 @@ export default {
             required: true
         },
         placeholder: String,
+        value: {
+          type: [String, Number],
+          default: ''
+        },
         errorMessage: {
             type: String,
             default: 'Error message'
         }
+    },
+
+    methods: {
+      inputValue(event) {
+        this.$emit('changeVal', event.target.value)
+      }
     }
 }
 
@@ -26,10 +36,11 @@ export default {
             <input 
                 type="text" 
                 :name="name" 
-                :placeholder
-                @input="$emit('changeValue', $event.target.value)" 
+                :placeholder="placeholder"
+                @input="inputValue"
+                :value="value"
             />
-            <span class="base-input__error"> {{ errorMessage }}</span>
+            <span v-if="errorMessage" class="base-input__error"> {{ errorMessage }}</span>
         </div>
     </div>
 
@@ -46,19 +57,18 @@ input {
   width: 100%;
   max-width: 100%;
   min-height: 32px;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(139, 132, 132, 0.2);
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   background: var(--color-white) !important;
 
   &::placeholder {
-    color: rgba(0, 0, 0, .26);
+    color: rgba(117, 113, 113, 0.26);
   }
 
   &:focus-visible {
     border-color: rgb(253, 211, 42);
-    /* border-color: var(--color-primary); */
   }
 }
 
@@ -87,11 +97,10 @@ input {
     right: 5px;
     padding: 8px;
     border-radius: 20px;
-    /* color: var(--color-text-emphasis); */
   }
 
   &_password button:hover {
-    background: rgba(192, 201, 216, .2);
+    background: rgba(145, 149, 157, 0.2);
   }
 
   &.js--error input {
@@ -99,7 +108,7 @@ input {
   }
 
   &__error {
-    margin-top: 4px;
+    margin-top: 5px;
     display: block;
     color: var(--colors-error);
     font-size: 12px;

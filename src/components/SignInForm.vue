@@ -1,4 +1,6 @@
 <script>
+import BaseButton from './BaseButton.vue';
+
     export default{
         data() {
             return {
@@ -6,12 +8,21 @@
                 password: '',
                 emailErrorMsg: '',
                 passwordErrorMsg: '',
+                placeholder: '',
                 loading: false,
                 resData: null
             }
         },  
         
         methods: {
+            changeVal(field, value) {
+               if (field === 'Email') {
+                   this.email = value
+               } else if (field === 'Password') {
+                   this.password = value
+               }
+           },
+
             async sendForm() {
                 this.loading = true
 
@@ -33,25 +44,66 @@
 
                 this.loading = false
             }
+        },
+
+        computed: {
+            isDisabledButton() {
+                const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+                return !EMAIL_REGEXP.test(this.email) || this.password.length < 6
+            }
         }
     }
 
 </script>
 
 <template>
-    <div>
-        <form class="sign-in-form">
-            <h2>Sign In form</h2>
-            
+    <BaseLayout>
+        <form class="sign-in-form" @submit.prevent="sendForm">
+            <h2 class="sign-in-form__title">Sign In form</h2>
+            <BaseInput 
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+                class="sign-in-form__input"
+                :error-message="emailErrorMsg"
+                @changeVal="changeVal('Email', $event)"
+                :value="email"
+            />
+            <BaseInput 
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                class="sign-in-form__input"
+                :error-message="passwordErrorMsg"
+                @changeVal="changeVal('Password', $event)"
+                :value="password"
+            />
+            <BaseButton 
+                class="sign-in-form__button"
+                @click.prevent="sendForm"
+                :is-disabled="isDisabledButton"
+                :loading
+            />
         </form>
-    </div>
+    </BaseLayout>
 </template>
 
 <style lang="scss" scoped>
 .sign-in-form {
-    &_button {
-        margin-top: 1rem;
-        width: 100%;
+    &__title {
+        margin-bottom: 30px;
+    }
+
+    &__input {
+        margin-bottom: 20px;
+    }
+
+    &__button {
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 10px 20px rgba(155, 162, 190, 0.3);
+        }
     }
 }
 </style>
